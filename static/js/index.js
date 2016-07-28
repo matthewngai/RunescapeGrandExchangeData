@@ -30,7 +30,7 @@ var DateRange =  React.createClass({
     render: function() {
         return (
             <div>
-                <SplitButton bsStyle="primary" title={this.state.value} id={`split-button-basic-${1}`} onSelect={this.change}>
+                <SplitButton bsStyle="warning" title={this.state.value} id={`split-button-basic-${1}`} onSelect={this.change}>
                   <MenuItem eventKey="1">1 Month</MenuItem>
                   <MenuItem eventKey="2">3 Months</MenuItem>
                   <MenuItem eventKey="3">6 Months</MenuItem>
@@ -41,6 +41,41 @@ var DateRange =  React.createClass({
 });
 
 var DropdownList = React.createClass({
+    getCategory: function(categoryID) {
+        var url = 'categories/' + categoryID;
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(url, status, err.toString());
+            }
+        });
+    },
+
+    getCategoryLetter: function(categoryID, letter) {
+        var url = 'categories/' + categoryID + '/' + letter;
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(url, status, err.toString());
+            }
+        });
+    },
+
+    componentDidMount: function() {
+        this.getCategory(1);
+        this.getCategoryLetter(1, 'a');
+    },
+
     render: function() {
         return (
             <div>
