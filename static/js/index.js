@@ -44,7 +44,11 @@ var DropdownList = React.createClass({
     getInitialState: function() {
         return {
             title: 'Category',
-            list: []
+            letterTitle: 'Letter',
+            list: [],
+            alphaList: [],
+            letterList: [],
+            selectedCategory: 0
         }
     },
     getCategory: function(categoryID) {
@@ -54,7 +58,8 @@ var DropdownList = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data) {
-                console.log(data);
+                this.setState({alphaList: data.alpha});
+                this.createAlphaDropdown();
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(url, status, err.toString());
@@ -90,15 +95,28 @@ var DropdownList = React.createClass({
         return items;
     },
 
+    createAlphaDropdown: function() {
+        var items = [];
+        var itemTitle;
+        this.state.alphaList.forEach(function(i) {
+            itemTitle = i.letter.toUpperCase() + " (" + i.items + ")";
+            items.push(<MenuItem key={i.letter} eventKey={i.letter}>{itemTitle}</MenuItem>);
+        });
+        this.setState({ letterList: items });
+    },
+
     change: function(event) {
-        this.setState({title: this.state.list[event].props.children});
+        this.setState({title: this.state.list[event].props.children, selectedCategory: event});
+        this.getCategory(event);
+    },
+
+    getLetter: function(event) {    
+        this.setState({ letterTitle : event.toUpperCase()});
+        this.getCategoryLetter(this.state.selectedCategory, event);
     },
 
     componentDidMount: function() {
-        this.getCategory(1);
-        this.getCategoryLetter(1, 'a');
         this.createDropdownItems();
-
     },
 
     render: function() {
@@ -108,7 +126,8 @@ var DropdownList = React.createClass({
                     <DropdownButton title={this.state.title} id="bg-nested-dropdown dropdown-size-large" onSelect={this.change}>
                     {this.state.list}
                     </DropdownButton>
-                    <DropdownButton title="Letter" id="bg-nested-dropdown dropdown-size-large" onSelect={this.getLetter}>
+                    <DropdownButton title={this.state.letterTitle} id="bg-nested-dropdown dropdown-size-large" onSelect={this.getLetter}>
+                    {this.state.letterList}
                     </DropdownButton>
                     <DropdownButton title="Item" id="bg-nested-dropdown dropdown-size-large">
                     </DropdownButton>
