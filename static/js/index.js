@@ -106,7 +106,7 @@ var DropdownList = React.createClass({
         var itemTitle;
         this.state.alphaList.forEach(function(i) {
             itemTitle = i.letter.toUpperCase() + " (" + i.items + ")";
-            items.push(<MenuItem key={i.letter} eventKey={i.letter}>{itemTitle}</MenuItem>);
+            items.push(<MenuItem key={i.letter} eventKey={i}>{itemTitle}</MenuItem>);
         });
         this.setState({ letterList: items });
     },
@@ -134,12 +134,12 @@ var DropdownList = React.createClass({
 
     getLetter: function(event) {    
         this.setState({ 
-            letterTitle : event.toUpperCase(),
-            selectedLetter: event,
+            letterTitle : event.letter.toUpperCase() + ' (' + event.items + ')',
+            selectedLetter: event.letter,
             selectedItem: null,
             itemTitle : 'Item'
         });
-        this.getCategoryLetter(this.state.selectedCategory, event);
+        this.getCategoryLetter(this.state.selectedCategory, event.letter);
     },
 
     getItem: function(event) {
