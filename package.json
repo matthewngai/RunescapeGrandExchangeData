@@ -1,5 +1,5 @@
 {
-  "name": "web-scraper",
+  "name": "RunescapeGrandExchangeData",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matthewngai/web-scraper.git"
+    "url": "git+https://github.com/matthewngai/RunescapeGrandExchangeData.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/matthewngai/web-scraper/issues"
+    "url": "https://github.com/matthewngai/RunescapeGrandExchangeData/issues"
   },
-  "homepage": "https://github.com/matthewngai/web-scraper#readme",
+  "homepage": "https://github.com/matthewngai/RunescapeGrandExchangeDatar#readme",
   "dependencies": {
     "express": "^4.14.0",
     "react": "^15.2.1",
