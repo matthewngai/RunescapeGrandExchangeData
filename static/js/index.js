@@ -3,6 +3,9 @@ var DropdownButton = ReactBootstrap.DropdownButton;
 var Button = ReactBootstrap.Button;
 var MenuItem = ReactBootstrap.MenuItem;
 var SplitButton = ReactBootstrap.SplitButton;
+var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+var FormGroup = ReactBootstrap.FormGroup;
+var Radio = ReactBootstrap.Radio;
 
 var App = React.createClass({
     render: function() {
@@ -23,6 +26,7 @@ var DateRange =  React.createClass({
     },
 
     change: function(event) {
+        console.log(event);
         var timeInterval = ['1 Month', '3 Months', '6 Months'];
         this.setState({value: timeInterval[event - 1]});
     },

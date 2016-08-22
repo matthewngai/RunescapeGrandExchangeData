@@ -25,6 +25,7 @@
     "require": "^2.4.20"
   },
   "devDependencies": {
-    "babel-plugin-transform-react-jsx": "^6.8.0"
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "react-d3": "^0.4.0"
   }
 }
