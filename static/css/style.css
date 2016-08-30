@@ -22,3 +22,142 @@ body {
 .background-colour-page {
 	background-color: #0b1f2a;
 }
+
+.header {
+  padding: 5px 50px;
+  background-color: #172f39;
+  margin: 0;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 1px 10px #02090f;
+}
+
+.header .header-banner h1 {
+  color: #e1bb34;
+  font-size: 36px;
+  margin-top: 0;
+  font-family: cinzelBold;
+}
+
+@font-face {
+    font-family: cinzelBold;
+    src: url(../font/cinzel/cinzelBold.ttf);
+}
+
+.top-margin {
+    margin-top: 7px;
+    position: fixed;
+}
+.styled-input-group .input-group-addon{
+    background: white !important; 
+}
+.styled-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.styled-input-group button {
+    border: 0;
+    background: transparent;
+}
+
+
+
+
+.scrollable-dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tt-input, /* UPDATE: newer versions use tt-input instead of tt-query */
+.tt-hint {
+    width: 396px;
+    height: 30px;
+    padding: 8px 12px;
+    font-size: 24px;
+    line-height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.tt-input { /* UPDATE: newer versions use tt-input instead of tt-query */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    color: #999;
+}
+
+.tt-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+    width: 422px;
+    margin-top: 12px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+.dropdown-colour {
+  background: #113240;
+}
+
+.dropdown-colour div {
+  color: white;
+}
+
+.rcorners {
+    border-radius: 7px;
+}
+
+.item-tile {
+    border-top: 1px solid #001a00;
+    border-left: 2px solid #001a00;
+    border-bottom: 1px solid #001a00;
+    border-right: 2px solid #001a00;
+}
+
+.pic {
+  display: inline-block;
+}
+
+.pic .image {
+  width: 64px;
+}
+
+.description {
+  display: inline-block;
+}
+
+.description .title {
+  font-size: 1.2em;
+}
+
+.description .text {
+  font-size: 0.9em;
+  color: #d8d8d8;
+}
+.dark-theme {
+  background: blue;
+}
+.item-tile:hover { 
+    background-color: #05374c;
+}

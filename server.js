@@ -15,53 +15,34 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 var page = '&page=';
-var alpha = '&alpha=';
-var category = 'category=';
-var items = 'items.json?';
-var category = 'category.json?';
-var service_url = 'http://services.runescape.com/m=itemdb_rs/api/catalogue/';
+var searchQuery = 'https://secure.runescape.com/l=0/a=14/p=wwGlrZHF5gKN6D3mDdihco3oPeYN2KFybL9hUUFqOvk/m=itemdb_rs/api/catalogue/search.json?query=';
 
-app.get('/categories/:categoryID', function (req, res) {
-	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/category.json?category=' + req.params.categoryID, function (error, response, body) {
+app.get('/search/:query', function (req, res) {
+	request(searchQuery + req.params.query, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
 		} else {
-			console.log(response.statusCode);
-			console.log(error);
+			console.log(response + error);
 		}
 	});
 });
 
-app.get('/categories/:categoryID/:letter', function (req, res) {
-	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category=' + req.params.categoryID + alpha + req.params.letter, function (error, response, body) {
+app.get('/search/:query/:pageNumber', function (req, res) {
+	request(searchQuery + req.params.query + page + req.params.pageNumber, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
 		} else {
-			console.log(response.statusCode);
-			console.log(error);
+			console.log(response + error);
 		}
 	});
 });
 
-app.get('/categories/:categoryID/:letter/:pageNumber', function (req, res) {
-	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category=' + req.params.categoryID + alpha + req.params.letter + page + req.params.pageNumber, function (error, response, body) {
-	  	if (!error && response.statusCode == 200) {
-			res.send(body);
-		} else {
-			console.log(response.statusCode);
-			console.log(error);
-		}
-	});
-});
-
-//item info and price
 app.get('/item/:itemID', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=' + req.params.itemID, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
 		} else {
-			console.log(response.statusCode);
-			console.log(error);
+			console.log(response.statusCode + error);
 		}
 	});
 });
@@ -71,8 +52,7 @@ app.get('/item/:itemID/graph', function (req, res) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
 		} else {
-			console.log(response.statusCode);
-			console.log(error);
+			console.log(response.statusCode + error);
 		}
 	});
 });
