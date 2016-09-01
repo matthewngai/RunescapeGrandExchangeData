@@ -170,6 +170,9 @@ var SearchModule = React.createClass({
 	onItemClick: function(id) {
 		$('#autocomplete').hide();
 	},
+	onMouseOver: function(id) {
+
+	},
 	render: function() {
 		return (
 			<div>
