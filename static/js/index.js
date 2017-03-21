@@ -276,6 +276,37 @@ d3.json(dataSet, function(error, data) {
     //monthly average
     var points_avg = [];
     var keys_avg = Object.keys(avg);
+
+	var areaGradient = svg.append("defs")
+	.append("linearGradient")
+	.attr("id","areaGradient")
+	.attr("x1", "0%").attr("y1", "0%")
+	.attr("x2", "0%").attr("y2", "80%");
+
+	areaGradient.append("stop")
+	.attr("offset", "0%")
+	.attr("stop-color", "#ffff66")
+	.attr("stop-opacity", 0.6);
+	areaGradient.append("stop")
+	.attr("offset", "80%")
+	.attr("stop-color", "white")
+	.attr("stop-opacity", 0);
+
+	var grayGradient = svg.append("defs")
+	.append("linearGradient")
+	.attr("id","grayGradient")
+	.attr("x1", "0%").attr("y1", "0%")
+	.attr("x2", "0%").attr("y2", "80%");
+
+	grayGradient.append("stop")
+	.attr("offset", "0%")
+	.attr("stop-color", "#d9d9d9")
+	.attr("stop-opacity", 0.6);
+	grayGradient.append("stop")
+	.attr("offset", "80%")
+	.attr("stop-color", "white")
+	.attr("stop-opacity", 0);
+
     var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
     for (var i = 0; i < keys.length; i++) {
       points_avg.push({x: keys_avg[i], y: vals_avg[i]});
@@ -287,7 +318,7 @@ d3.json(dataSet, function(error, data) {
         svg.append("path")
           .datum(points)
           .attr("class", "area")
-          .style("fill", "yellow")
+          .style("fill", "url(#areaGradient)")
           .style("opacity", 0.2)
           .attr("d", area);
 
@@ -299,7 +330,7 @@ d3.json(dataSet, function(error, data) {
     svg.append("path")
           .datum(points_avg)
           .attr("class", "area")
-          .style("fill", "grey")
+          .style("fill", "url(#grayGradient)")
           .attr("d", area)
           .style("opacity", 0.2);
 
