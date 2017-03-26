@@ -8,6 +8,15 @@ var FormGroup = ReactBootstrap.FormGroup;
 var Radio = ReactBootstrap.Radio;
 
 var App = React.createClass({
+	componentDidMount: function () {
+	    window.addEventListener('mouseup', this.pageClick, false);
+	},
+	pageClick: function(evt) {
+		if ($(evt.target).parents('#autocomplete').length || $(evt.target)[0].id === "searchbox" || $(evt.target)[0].id === "autocomplete") {
+		} else {
+			$('#autocomplete').hide();
+		}
+	},
 	render: function() {
 		return (
 			<div>
@@ -56,7 +65,7 @@ var Header = React.createClass({
 						<div className="col-md-4 header-banner">
 							<h1>Runescape Grand Exchange Data</h1>
 						</div>
-						<div className="col-md-8">
+						<div className="col-md-8 header-banner">
 							<SearchModule />
 						</div>
 					</div>
@@ -159,20 +168,33 @@ var SearchModule = React.createClass({
 			url: searchQuery,
 			cache: false
 		}).done(function(data) {
+			console.log(data);
 			var searchResults = data.results;
-			var listItems = searchResults.map(function(item) {
-			  return (
-				<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item.id)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
-				  <span className="pic">
-				  	<img className="image" src={item.icon_large} />
-				  </span>
-				  <span className="description">
-				  	<div className="title">{item.name}</div>
-				  	<div className="text">{item.description}</div>
-				  </span>
-				</div>
-			  );
-			});
+			var listItems;
+			if (searchResults.length) {
+				listItems = searchResults.map(function(item) {
+				  return (
+					<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item.id)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
+					  <span className="pic">
+					  	<img className="image" src={item.icon_large} />
+					  </span>
+					  <span className="description">
+					  	<div className="title">{item.name}</div>
+					  	<div className="text">{item.description}</div>
+					  </span>
+					</div>
+				  );
+				});
+			} else {
+				listItems = (
+					<div className="item-tile" key="none" id="none">
+					  <span className="description">
+					  	<div className="title">No Results Found</div>
+					  </span>
+					</div>
+				  );		
+			}
+
 			that.setState({displayResults: listItems});
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
@@ -191,7 +213,8 @@ var SearchModule = React.createClass({
 	onFocus: function() {
 		$('#autocomplete').show();
 	},
-	onBlur: function() {
+	onBlur: function(e) {
+		// console.log(e.target);
 		//close dropdown
 		// $('#autocomplete').hide();
 	},
@@ -368,7 +391,20 @@ d3.json(dataSet, function(error, data) {
         .style("stroke", "white")
         .call(yAxis);
 
+	svg.append("text")
+	    .attr("class", "x label")
+	    .attr("text-anchor", "end")
+	    .attr("x", width)
+	    .attr("y", height - 6)
+	    .text("Time");
 
+	svg.append("text")
+	    .attr("class", "y label")
+	    .attr("text-anchor", "end")
+	    .attr("y", 6)
+	    .attr("dy", ".75em")
+	    .attr("transform", "rotate(-90)")
+	    .text("Coins");
 });
 
 
