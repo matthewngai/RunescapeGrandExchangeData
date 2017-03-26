@@ -384,11 +384,15 @@ d3.json(dataSet, function(error, data) {
         .attr("class", "x axis")
         .attr("transform", "translate(0, "+height+")")
         .style("stroke", "white")
+        .style("fill", "white")
+        .style("class", "textLabels")
         .call(xAxis);
 
     svg.append("g")
         .attr("class", "y axis")
         .style("stroke", "white")
+        .style("fill", "white")
+        .style("class", "textLabels")
         .call(yAxis);
 
 	svg.append("text")
