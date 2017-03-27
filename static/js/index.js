@@ -236,7 +236,7 @@ var SearchModule = React.createClass({
 			var dataSet = data;
 
 
-  var margin = {top: 30, right: 20, bottom: 30, left: 50};
+  var margin = {top: 30, right: 120, bottom: 30, left: 150};
   var width = 1280 - margin.left - margin.right;
   var height = 720 - margin.top - margin.bottom;
 
@@ -266,7 +266,18 @@ var svg = d3.select("body")
 	    .orient("bottom").ticks(10);
 
 	var yAxis = d3.svg.axis().scale(y)
-	    .orient("left").ticks(7);
+	    .orient("left").ticks(7)
+	    	        .tickFormat(function (d) {
+			    var array = ['','k','M','G','T','P'];
+			    var i=0;
+			    while (d > 1000)
+			    {
+			        i++;
+			        d = d/1000;
+			    }
+			    d = d+array[i];
+			    return d;}
+    		);
 
 	function make_x_axis() {        
 	    return d3.svg.axis()
@@ -409,8 +420,7 @@ d3.json(dataSet, function(error, data) {
 	    .attr("dy", ".75em")
 	    .attr("transform", "rotate(-90)")
 	    .text("Coins");
-});
-
+	});
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + errorThrown);
