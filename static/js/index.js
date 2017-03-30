@@ -101,7 +101,7 @@ var SearchModule = React.createClass({
 						var searchResults = data.results;
 						var listItems = searchResults.map(function(item) {
 						  return (
-							<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item.id)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
+							<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
 							  <span className="pic">
 							  	<img className="image" src={item.icon_large} />
 							  </span>
@@ -145,7 +145,7 @@ var SearchModule = React.createClass({
 			if (searchResults.length) {
 				listItems = searchResults.map(function(item) {
 				  return (
-					<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item.id)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
+					<div className="item-tile" key={item.id} id={item.id} onClick={that.onItemClick.bind(that, item)} onMouseOver={that.onMouseOver.bind(that, item.id)}>
 					  <span className="pic">
 					  	<img className="image" src={item.icon_large} />
 					  </span>
@@ -193,10 +193,10 @@ var SearchModule = React.createClass({
 
 	},
 
-	onItemClick: function(id) {
+	onItemClick: function(item) {
 
 		$('#autocomplete').hide();	//hide search bar
-		var searchQuery = "/item/" + id + "/" + "graph";
+		var searchQuery = "/item/" + item.id + "/" + "graph";
 		this.xhr = $.ajax({
 			dataType: 'json',
 			url: searchQuery,
