@@ -22,6 +22,7 @@ var App = React.createClass({
 			<div>
 				<Header />
 				<DateRange />
+				<InfoTile />
 			</div>
 		)
 	}
@@ -44,6 +45,17 @@ var Header = React.createClass({
 			</div>
 
 		);
+	}
+});
+
+var InfoTile = React.createClass({
+	getInitialState: function() {
+		return {
+			infoTile: null
+		}
+	},
+	render: function() {
+		return null;
 	}
 });
 
