@@ -8,6 +8,11 @@ var FormGroup = ReactBootstrap.FormGroup;
 var Radio = ReactBootstrap.Radio;
 
 var App = React.createClass({
+	getInitialState: function() {
+		return {
+			selectedInfoTile : null
+		}
+	},
 	componentDidMount: function () {
 	    window.addEventListener('mouseup', this.pageClick, false);
 	},
@@ -17,10 +22,13 @@ var App = React.createClass({
 			$('#autocomplete').hide();
 		}
 	},
+	delegateTile: function(e) {
+		this.setState({selectedInfoTile: e});
+	},
 	render: function() {
 		return (
 			<div>
-				<Header />
+				<Header tileToPage={this.delegateTile}/>
 				<DateRange />
 				<InfoTile />
 			</div>
@@ -29,6 +37,9 @@ var App = React.createClass({
 });
 
 var Header = React.createClass({
+	changeTile: function(e) {
+		this.props.tileToPage(e);
+	},
 	render: function() {
 		return (
 			<div className="header">
@@ -38,7 +49,7 @@ var Header = React.createClass({
 							<h1>Runescape Grand Exchange Data</h1>
 						</div>
 						<div className="col-md-8 header-banner">
-							<SearchModule />
+							<SearchModule onTileChange={this.changeTile} />
 						</div>
 					</div>
 				</div>
@@ -206,6 +217,8 @@ var SearchModule = React.createClass({
 	},
 
 	onItemClick: function(item) {
+
+		this.props.onTileChange(item); //pass item
 
 		$('#autocomplete').hide();	//hide search bar
 		var searchQuery = "/item/" + item.id + "/" + "graph";
