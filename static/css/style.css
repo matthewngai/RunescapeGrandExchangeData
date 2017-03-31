@@ -167,3 +167,7 @@ body {
 .item-tile:hover { 
     background-color: #05374c;
 }
+
+.tileTable {
+  color: white;
+}
