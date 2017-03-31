@@ -76,20 +76,20 @@ var InfoTile = React.createClass({
 				<div className="tileTable">
 					<table>
 					  <tr>
-					    <th><img className="image" src={this.state.infoTile.icon_large} /></th>
-					    <th><span>{this.state.infoTile.name} {this.state.infoTile.members}</span></th>
+					    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
+					    <td><span>{this.state.infoTile.name} {this.state.infoTile.members}</span></td>
 					  </tr>
 					  <tr>
-					    <td>Description: {this.state.infoTile.description}</td>
+					    <td colSpan="2">Description: {this.state.infoTile.description}</td>
 					  </tr>
 					  <tr>
-					    <td>Type: {this.state.infoTile.type}</td>
+					    <td colSpan="2">Type: {this.state.infoTile.type}</td>
 					  </tr>
 					  <tr>
-					    <td>Price: {this.state.infoTile.current.price}</td>
+					    <td colSpan="2">Price: {this.state.infoTile.current.price}</td>
 					  </tr>
 					  <tr>
-					    <td>Trend: {this.state.infoTile.current.trend}</td>
+					    <td colSpan="2">Trend: {this.state.infoTile.current.trend}</td>
 					  </tr>
 					</table>
 				</div>
