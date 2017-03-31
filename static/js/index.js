@@ -74,7 +74,16 @@ var InfoTile = React.createClass({
 		if (this.state.infoTile !== null && this.state.infoTile !== undefined) {
 			return (
 				<div>
-				<img className="image" src={this.state.infoTile.icon_large} />
+					<div>
+						<img className="image" src={this.state.infoTile.icon_large} />
+						<span>{this.state.infoTile.name}</span>
+					</div>
+					<div>
+						{this.state.infoTile.description}
+					</div>
+					<div>
+						{this.state.infoTile.type}
+					</div>
 				</div>
 			)
 		}
