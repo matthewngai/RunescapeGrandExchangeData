@@ -84,6 +84,9 @@ var InfoTile = React.createClass({
 					<div>
 						{this.state.infoTile.type}
 					</div>
+					<div>
+					Trend: {this.state.infoTile.today.trend}
+					</div>
 				</div>
 			)
 		}
