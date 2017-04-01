@@ -291,8 +291,9 @@ var SearchModule = React.createClass({
 			cache: false
 		}).done(function(data) {
 			console.log(data);
-			d3.select("svg").remove();	//remove SVG
+
 			var dataSet = data;
+			d3.select("svg").remove();	//remove SVG
 
 			if (that.state.dateFormat === 0) {
 				//remove first 150 keys
