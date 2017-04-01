@@ -324,8 +324,6 @@ var svg = d3.select("body")
 
 //replaace function with array
 d3.json(dataSet, function(error, data) {
-	console.log(error);
-	console.log(dataSet);
   var day = dataSet.daily;
   var avg = dataSet.average;
     //daily
@@ -423,14 +421,12 @@ d3.json(dataSet, function(error, data) {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0, "+height+")")
-        .style("stroke", "white")
         .style("fill", "white")
         .style("class", "textLabels")
         .call(xAxis);
 
     svg.append("g")
         .attr("class", "y axis")
-        .style("stroke", "white")
         .style("fill", "white")
         .style("class", "textLabels")
         .call(yAxis);
@@ -440,9 +436,9 @@ d3.json(dataSet, function(error, data) {
 	    .attr("text-anchor", "middle")
 	    .attr("x", width/2)
 	    .attr("y", height+(margin.bottom - 7))
-	    .style("stroke", "white")
 	    .style("fill", "white")
 		.style("font-size", "16px")
+		.style("font-weight", "lighter")
 	    .text("Time");
 
 	svg.append("text")
@@ -451,9 +447,9 @@ d3.json(dataSet, function(error, data) {
 	    .attr("y", 6)
 	    .attr("dy", ".75em")
 	    .attr("transform", "translate("+ (-margin.left/2) +","+(height/2)+")rotate(-90)")
-	    .style("stroke", "white")
 	    .style("fill", "white")
 	    .style("font-size", "16px")
+	    .style("font-weight", "lighter")
 	    .text("Price (Coins)");
 	});
 
