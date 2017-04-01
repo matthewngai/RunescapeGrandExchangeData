@@ -439,7 +439,7 @@ d3.json(dataSet, function(error, data) {
 	    .attr("class", "x label")
 	    .attr("text-anchor", "middle")
 	    .attr("x", width/2)
-	    .attr("y", height+(margin.bottom))
+	    .attr("y", height+(margin.bottom - 7))
 	    .style("stroke", "white")
 	    .style("fill", "white")
 		.style("font-size", "16px")
@@ -454,7 +454,7 @@ d3.json(dataSet, function(error, data) {
 	    .style("stroke", "white")
 	    .style("fill", "white")
 	    .style("font-size", "16px")
-	    .text("Coins");
+	    .text("Price (Coins)");
 	});
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
