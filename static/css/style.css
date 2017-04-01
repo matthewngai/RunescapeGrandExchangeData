@@ -185,3 +185,7 @@ table {
   width: 300px;
   border: 1px solid white;
 }
+
+.date-button {
+  margin-left: 25px; 
+}

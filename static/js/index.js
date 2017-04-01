@@ -29,7 +29,6 @@ var App = React.createClass({
 		return (
 			<div>
 				<Header tileToPage={this.delegateTile}/>
-				<DateRange />
 				<InfoTile infoTile={this.state.selectedInfoTile}/>
 			</div>
 		)
@@ -73,29 +72,32 @@ var InfoTile = React.createClass({
 	render: function() {
 		if (this.state.infoTile !== null && this.state.infoTile !== undefined) {
 			return (
-				<div className="tileTable">
-					<table>
-					  <tbody>
-						  <tr>
-						    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
-						    <td><span>{this.state.infoTile.name}</span>
-						     {this.state.infoTile.members=='true' ? <img src="../img/members.png" /> : false}
-						    </td>
-						  </tr>
-						  <tr>
-						    <td colSpan="2">Description: {this.state.infoTile.description}</td>
-						  </tr>
-						  <tr>
-						    <td colSpan="2">Type: {this.state.infoTile.type}</td>
-						  </tr>
-						  <tr>
-						    <td colSpan="2">Price: {this.state.infoTile.current.price} coins</td>
-						  </tr>
-						  <tr>
-						    <td colSpan="2">Trend: {this.state.infoTile.current.trend}</td>
-						  </tr>
-					  </tbody>
-					</table>
+				<div>
+					<div className="tileTable">
+						<table>
+						  <tbody>
+							  <tr>
+							    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
+							    <td><span>{this.state.infoTile.name}</span>
+							     {this.state.infoTile.members=='true' ? <img src="../img/members.png" /> : false}
+							    </td>
+							  </tr>
+							  <tr>
+							    <td colSpan="2">Description: {this.state.infoTile.description}</td>
+							  </tr>
+							  <tr>
+							    <td colSpan="2">Type: {this.state.infoTile.type}</td>
+							  </tr>
+							  <tr>
+							    <td colSpan="2">Price: {this.state.infoTile.current.price} coins</td>
+							  </tr>
+							  <tr>
+							    <td colSpan="2">Trend: {this.state.infoTile.current.trend}</td>
+							  </tr>
+						  </tbody>
+						</table>
+					</div>
+					<DateRange />
 				</div>
 			)
 		}
@@ -106,27 +108,28 @@ var InfoTile = React.createClass({
 var DateRange =  React.createClass({
 	getInitialState: function() {
 		return {
-			value: '1 Month'
+			label: '6 Months',
+			value: 2
 		}
 	},
 
 	change: function(event) {
 		console.log(event);
 		var timeInterval = ['1 Month', '3 Months', '6 Months'];
-		this.setState({value: timeInterval[event - 1]});
+		this.setState({label: timeInterval[event - 1], value: event-1});
 	},
 
 	render: function() {
-		// return (
-		// 	<div>
-		// 		<SplitButton bsStyle="warning" title={this.state.value} id={`split-button-basic-${1}`} onSelect={this.change}>
-		// 		  <MenuItem eventKey="1">1 Month</MenuItem>
-		// 		  <MenuItem eventKey="2">3 Months</MenuItem>
-		// 		  <MenuItem eventKey="3">6 Months</MenuItem>
-		// 		</SplitButton>
-		// 	</div>
-		// )
-		return null;
+		return (
+			<div className="date-button">
+				<SplitButton bsStyle="warning" title={this.state.label} id={`split-button-basic-${1}`} onSelect={this.change}>
+				  <MenuItem eventKey="1">1 Month</MenuItem>
+				  <MenuItem eventKey="2">3 Months</MenuItem>
+				  <MenuItem eventKey="3">6 Months</MenuItem>
+				</SplitButton>
+			</div>
+		)
+		// return null;
 	}
 });
 
