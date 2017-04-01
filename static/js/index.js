@@ -10,7 +10,8 @@ var Radio = ReactBootstrap.Radio;
 var App = React.createClass({
 	getInitialState: function() {
 		return {
-			selectedInfoTile : null
+			selectedInfoTile : null,
+			currentDateRange: 2
 		}
 	},
 	componentDidMount: function () {
@@ -25,17 +26,30 @@ var App = React.createClass({
 	delegateTile: function(e) {
 		this.setState({selectedInfoTile: e});
 	},
+	changeDateApp: function(e) {
+		this.setState({currentDateRange: e});
+	},
 	render: function() {
 		return (
 			<div>
-				<Header tileToPage={this.delegateTile}/>
-				<InfoTile infoTile={this.state.selectedInfoTile}/>
+				<Header tileToPage={this.delegateTile} dateToHeader={this.state.currentDateRange}/>
+				<InfoTile infoTile={this.state.selectedInfoTile} dateToApp={this.changeDateApp}/>
 			</div>
 		)
 	}
 });
 
 var Header = React.createClass({
+	getInitialState: function() {
+		return {
+			dateToModule: this.props.dateToHeader
+		}
+	},
+	componentWillReceiveProps: function(nextProps) {
+		if (this.props.dateToHeader !== nextProps.dateToHeader) {
+			this.setState({ dateToModule: nextProps.dateToHeader });
+		}
+	},
 	changeTile: function(e) {
 		this.props.tileToPage(e);
 	},
@@ -48,7 +62,7 @@ var Header = React.createClass({
 							<h1>Runescape Grand Exchange Data</h1>
 						</div>
 						<div className="col-md-8 header-banner">
-							<SearchModule onTileChange={this.changeTile} />
+							<SearchModule onTileChange={this.changeTile} currentDate={this.state.dateToModule}/>
 						</div>
 					</div>
 				</div>
@@ -63,6 +77,9 @@ var InfoTile = React.createClass({
 		return {
 			infoTile: this.props.infoTile
 		}
+	},
+	changeDate: function(e) {
+		this.props.dateToApp(e);
 	},
 	componentWillReceiveProps: function(nextProps) {
 		if (this.props.infoTile !== nextProps.infoTile) {
@@ -97,7 +114,7 @@ var InfoTile = React.createClass({
 						  </tbody>
 						</table>
 					</div>
-					<DateRange />
+					<DateRange onDateChange={this.changeDate}/>
 				</div>
 			)
 		}
@@ -114,7 +131,7 @@ var DateRange =  React.createClass({
 	},
 
 	change: function(event) {
-		console.log(event);
+		this.props.onDateChange(event-1); //pass date up
 		var timeInterval = ['1 Month', '3 Months', '6 Months'];
 		this.setState({label: timeInterval[event - 1], value: event-1});
 	},
@@ -142,10 +159,15 @@ var SearchModule = React.createClass({
 			selectedItem : null,
 			searchQuery: '',
 			searchResults: [],
-			displayResults : null
+			displayResults : null,
+			dateFormat: this.props.currentDate
 		}
 	},
-
+	componentWillReceiveProps: function(nextProps) {
+		if (this.props.currentDate !== nextProps.currentDate) {
+			this.setState({ dateFormat: nextProps.currentDate });
+		}
+	},
 	componentDidMount: function() {
 		var that = this;
 		$('#autocomplete').on('scroll', function() {
@@ -244,7 +266,6 @@ var SearchModule = React.createClass({
 		$('#autocomplete').show();
 	},
 	onBlur: function(e) {
-		// console.log(e.target);
 		//close dropdown
 		// $('#autocomplete').hide();
 	},
@@ -253,7 +274,7 @@ var SearchModule = React.createClass({
 	},
 
 	onItemClick: function(item) {
-
+		var that = this;
 		this.props.onTileChange(item); //pass item
 
 		$('#autocomplete').hide();	//hide search bar
@@ -267,18 +288,24 @@ var SearchModule = React.createClass({
 			d3.select("svg").remove();
 			var dataSet = data;
 
+			if (that.state.dateFormat === 0) {
 
-  var margin = {top: 50, right: 150, bottom: 50, left: 150};
-  var width = 1280 - margin.left - margin.right;
-  var height = 720 - margin.top - margin.bottom;
+			}
+			else if (that.state.dateFormat === 1) {
 
-var svg = d3.select("body")
-    .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-        .attr("transform", 
-              "translate(" + margin.left + "," + margin.top + ")");
+			}
+
+		var margin = {top: 50, right: 150, bottom: 50, left: 150};
+		var width = 1280 - margin.left - margin.right;
+		var height = 720 - margin.top - margin.bottom;
+
+		var svg = d3.select("body")
+		    .append("svg")
+		        .attr("width", width + margin.left + margin.right)
+		        .attr("height", height + margin.top + margin.bottom)
+		    .append("g")
+		        .attr("transform", 
+		              "translate(" + margin.left + "," + margin.top + ")");
 
 	// Set the ranges
 	var x = d3.time.scale().range([0, width]);
