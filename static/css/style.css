@@ -67,9 +67,6 @@ body {
     background: transparent;
 }
 
-
-
-
 .scrollable-dropdown-menu {
   max-height: 350px;
   overflow-y: auto;
@@ -171,12 +168,18 @@ body {
 .tileTable {
   color: white;
   padding: 25px;
+  border-collapse: separate !important;
 }
 
-table, th, td {
-  border: 1px solid white;
+th, td {
+  border-collapse: separate !important;
 }
 
 td {
   padding: 10px !important;
+}
+
+table {
+  width: 300px;
+  border: 1px solid white;
 }
