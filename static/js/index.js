@@ -279,31 +279,20 @@ var SearchModule = React.createClass({
 		}
 		return obj;                                                          
 	},
-	onItemClick: function(item) {
-		var that = this;
-		this.props.onTileChange(item); //pass item
-
-		$('#autocomplete').hide();	//hide search bar
-		var searchQuery = "/item/" + item.id + "/" + "graph";
-		this.xhr = $.ajax({
-			dataType: 'json',
-			url: searchQuery,
-			cache: false
-		}).done(function(data) {
-			console.log(data);
+	displayGraph: function(data) {
 
 			var dataSet = data;
 			d3.select("svg").remove();	//remove SVG
 
-			if (that.state.dateFormat === 0) {
+			if (this.state.dateFormat === 0) {
 				//remove first 150 keys
-				dataSet.daily = that.removeDates(dataSet.daily, 150);
-				dataSet.average = that.removeDates(dataSet.average, 150);
+				dataSet.daily = this.removeDates(dataSet.daily, 150);
+				dataSet.average = this.removeDates(dataSet.average, 150);
 			}
-			else if (that.state.dateFormat === 1) {
+			else if (this.state.dateFormat === 1) {
 				//remove first 90 keys
-				dataSet.daily = that.removeDates(dataSet.daily, 90);
-				dataSet.average = that.removeDates(dataSet.average, 90);
+				dataSet.daily = this.removeDates(dataSet.daily, 90);
+				dataSet.average = this.removeDates(dataSet.average, 90);
 			}
 
 		var margin = {top: 50, right: 150, bottom: 50, left: 150};
@@ -493,6 +482,21 @@ d3.json(dataSet, function(error, data) {
 	    .style("font-weight", "lighter")
 	    .text("Price (Coins)");
 	});
+
+	},
+	onItemClick: function(item) {
+		var that = this;
+		this.props.onTileChange(item); //pass item
+
+		$('#autocomplete').hide();	//hide search bar
+		var searchQuery = "/item/" + item.id + "/" + "graph";
+		this.xhr = $.ajax({
+			dataType: 'json',
+			url: searchQuery,
+			cache: false
+		}).done(function(data) {
+			console.log(data);
+			that.displayGraph(data);
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + errorThrown);
