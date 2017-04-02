@@ -230,7 +230,6 @@ var SearchModule = React.createClass({
 			url: searchQuery,
 			cache: false
 		}).done(function(data) {
-			console.log(data);
 			var searchResults = data.results;
 			var listItems;
 			if (searchResults.length) {
@@ -543,7 +542,6 @@ var SearchModule = React.createClass({
 			url: searchQuery,
 			cache: false
 		}).done(function(data) {
-			console.log(data);
 			that.setState({dataResults: data});
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
