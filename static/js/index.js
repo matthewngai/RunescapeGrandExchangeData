@@ -160,13 +160,29 @@ var SearchModule = React.createClass({
 			searchQuery: '',
 			searchResults: [],
 			displayResults : null,
-			dateFormat: this.props.currentDate
+			dateFormat: this.props.currentDate,
+			dataResults: null
 		}
 	},
 	componentWillReceiveProps: function(nextProps) {
 		if (this.props.currentDate !== nextProps.currentDate) {
 			this.setState({ dateFormat: nextProps.currentDate });
 		}
+	},
+	shouldComponentUpdate: function(nextProps, nextState) {
+		if (this.state.dataResults !== nextState.dataResults) {
+			var _data = nextState.dataResults;
+			var _date = this.state.dateFormat;
+			console.log("data changed");
+			this.displayGraph(_data, _date);
+		}
+		else if (this.state.dateFormat !== nextState.dateFormat) {
+			// Get the size of an object
+			var _data = this.state.dataResults;
+			var _date = nextState.dateFormat;
+			this.displayGraph(_data, _date);
+		}
+		return true;
 	},
 	componentDidMount: function() {
 		var that = this;
@@ -272,28 +288,9 @@ var SearchModule = React.createClass({
 	onSubmit: function() {
 
 	},
-	removeDates: function(obj, datesToTruncate) {
-		var propertyArray = Object.values(obj);         
-		for(var i = 0; i < datesToTruncate; i++) {
-		  delete obj[Object.keys(obj)[i]];
-		}
-		return obj;                                                          
-	},
-	displayGraph: function(data) {
-
+	displayGraph: function(data, currentDate) {
+			d3.selectAll("svg").remove();	//remove SVG
 			var dataSet = data;
-			d3.select("svg").remove();	//remove SVG
-
-			if (this.state.dateFormat === 0) {
-				//remove first 150 keys
-				dataSet.daily = this.removeDates(dataSet.daily, 150);
-				dataSet.average = this.removeDates(dataSet.average, 150);
-			}
-			else if (this.state.dateFormat === 1) {
-				//remove first 90 keys
-				dataSet.daily = this.removeDates(dataSet.daily, 90);
-				dataSet.average = this.removeDates(dataSet.average, 90);
-			}
 
 		var margin = {top: 50, right: 150, bottom: 50, left: 150};
 		var width = 1280 - margin.left - margin.right;
@@ -356,11 +353,13 @@ var SearchModule = React.createClass({
 d3.json(dataSet, function(error, data) {
   var day = dataSet.daily;
   var avg = dataSet.average;
+
+  	var datesArray = [150, 90, 0];	//dates to start at
     //daily
     var keys = Object.keys(day);
     var vals = Object.keys(day).map(function (key) { return day[key]; });
     var points = [];
-    for (var i = 0; i < keys.length; i++) {
+    for (var i = datesArray[currentDate]; i < keys.length; i++) {
       points.push({x: keys[i], y: vals[i]});
     }
 
@@ -398,10 +397,11 @@ d3.json(dataSet, function(error, data) {
 	.attr("stop-color", "white")
 	.attr("stop-opacity", 0);
 
+
     var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
-    for (var i = 0; i < keys.length; i++) {
+    for (var i = datesArray[currentDate]; i < keys.length; i++) {
       points_avg.push({x: keys_avg[i], y: vals_avg[i]});
-    } 
+    }
 
     x.domain(d3.extent(keys));
     y.domain([0, d3.max(vals)]);
@@ -496,7 +496,7 @@ d3.json(dataSet, function(error, data) {
 			cache: false
 		}).done(function(data) {
 			console.log(data);
-			that.displayGraph(data);
+			that.setState({dataResults: data});
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + errorThrown);
