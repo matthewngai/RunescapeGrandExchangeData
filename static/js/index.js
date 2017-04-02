@@ -311,6 +311,11 @@ var SearchModule = React.createClass({
 		    .x(function(d) { return x(d.x); })
 		    .y(function(d) { return y(d.y); });
 
+		// Define the div for the tooltip
+		var div = d3.select("body").append("div")	
+		    .attr("class", "tooltip")				
+		    .style("opacity", 0);
+
 		//scale axis accordingly and set ticks
 		var xAxis = d3.svg.axis().scale(x)
 		    .orient("bottom").ticks(10);
@@ -427,6 +432,30 @@ var SearchModule = React.createClass({
 			.attr("offset", "80%")
 			.attr("stop-color", "white")
 			.attr("stop-opacity", 0);
+
+		    // Add the scatterplot
+		    var timeFormat = d3.time.format("%d %b %y");
+		    var commaFormat = d3.format(',');
+		    svg.selectAll("dot")	
+		        .data(points)			
+		    .enter().append("circle")
+		        .attr("r", 3)
+		        .style("fill", "yellow")
+		        .attr("cx", function(d) { return x(d.x); })
+		        .attr("cy", function(d) { return y(d.y); })
+		        .on("mouseover", function(d) {
+		            div.transition()
+		                .duration(200)
+		                .style("opacity", .9);		
+		            div.html(timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
+		                .style("left", (d3.event.pageX) + "px")
+		                .style("top", (d3.event.pageY - 28) + "px");
+		            })
+		        .on("mouseout", function(d) {
+		            div.transition()
+		                .duration(500)
+		                .style("opacity", 0);
+		        });
 
 			svg.append("g")         
 		        .attr("class", "grid")
