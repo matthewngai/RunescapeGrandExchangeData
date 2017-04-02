@@ -274,6 +274,8 @@ var SearchModule = React.createClass({
 		if (key.match(/ArrowDown|ArrowUp/)) {
 			e.preventDefault();
 			console.log(e.key);
+		} else if (key.match(/Enter/)) {
+			e.preventDefault();
 		}
 	},
 	onFocus: function() {
