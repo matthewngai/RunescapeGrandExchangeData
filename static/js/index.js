@@ -146,8 +146,8 @@ var DateRange =  React.createClass({
 					  <MenuItem eventKey="3">6 Months</MenuItem>
 					</SplitButton>
 					<span className="label-styling">
-						<span className="image-padding"><img className="image-padding" src="../img/yellow.png"/>Daily</span>
-						<span className="image-padding"><img className="image-padding" src="../img/gray.png"/>Trend</span>
+						<span className="image-padding"><img className="image-padding" src="../img/yellow.PNG"/>Daily</span>
+						<span className="image-padding"><img className="image-padding" src="../img/gray.PNG"/>Trend</span>
 					</span>
 				</div>
 			</div>
