@@ -351,11 +351,15 @@ var SearchModule = React.createClass({
 
 		    //daily
 		    var points = [];
+		    var datesRanges = [];
 		    var keys = Object.keys(day);
 		    var vals = Object.keys(day).map(function (key) { return day[key]; });
+		    var valueAvg = Object.keys(avg).map(function (key) { return avg[key]; });
+		    vals.push.apply(vals, valueAvg);
 
 		    for (var i = datesArray[currentDate]; i < keys.length; i++) {
 		      points.push({x: keys[i], y: vals[i]});
+		      datesRanges.push(keys[i]);
 		    }
 
 		    //monthly average
@@ -367,7 +371,7 @@ var SearchModule = React.createClass({
 		      points_avg.push({x: keys_avg[i], y: vals_avg[i]});
 		    }
 
-		    x.domain(d3.extent(keys));
+		    x.domain(d3.extent(datesRanges));
 		    y.domain([0, d3.max(vals)]);
 
 		        svg.append("path")
