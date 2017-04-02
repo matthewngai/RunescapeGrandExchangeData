@@ -473,7 +473,7 @@ var SearchModule = React.createClass({
 		            div.transition()
 		                .duration(200)
 		                .style("opacity", .9);		
-		            div.html("Average" + "<br/>" + timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
+		            div.html("Trend" + "<br/>" + timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
 		                .style("left", (d3.event.pageX) + "px")
 		                .style("top", (d3.event.pageY - 28) + "px");
 		            })
