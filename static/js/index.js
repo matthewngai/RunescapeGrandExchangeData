@@ -1,11 +1,6 @@
-var ButtonGroup = ReactBootstrap.ButtonGroup;
-var DropdownButton = ReactBootstrap.DropdownButton;
 var Button = ReactBootstrap.Button;
 var MenuItem = ReactBootstrap.MenuItem;
 var SplitButton = ReactBootstrap.SplitButton;
-var ButtonToolbar = ReactBootstrap.ButtonToolbar;
-var FormGroup = ReactBootstrap.FormGroup;
-var Radio = ReactBootstrap.Radio;
 
 var App = React.createClass({
 	getInitialState: function() {
