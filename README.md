@@ -4,6 +4,10 @@
 Graphs of Grand Exchange item prices
 
 
+## Demo
+
+https://grandexchange.herokuapp.com/
+
 ## Installation
 ```
 npm install
