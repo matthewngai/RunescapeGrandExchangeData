@@ -225,39 +225,39 @@ var svg = d3.select("body")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
 
-// Set the ranges
-var x = d3.time.scale().range([0, width]);
-var y = d3.scale.linear().range([height, 0]);
+	// Set the ranges
+	var x = d3.time.scale().range([0, width]);
+	var y = d3.scale.linear().range([height, 0]);
 
-var area = d3.svg.area()
-    .x(function(d) { return x(d.x); })
-    .y0(height)
-    .y1(function(d) { return y(d.y); });
-//plot lines
-var line = d3.svg.line() 
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y); });
+	var area = d3.svg.area()
+	    .x(function(d) { return x(d.x); })
+	    .y0(height)
+	    .y1(function(d) { return y(d.y); });
+	//plot lines
+	var line = d3.svg.line() 
+	    .x(function(d) { return x(d.x); })
+	    .y(function(d) { return y(d.y); });
 
-//scale axis accordingly and set ticks
-var xAxis = d3.svg.axis().scale(x)
-    .orient("bottom").ticks(10);
+	//scale axis accordingly and set ticks
+	var xAxis = d3.svg.axis().scale(x)
+	    .orient("bottom").ticks(10);
 
-var yAxis = d3.svg.axis().scale(y)
-    .orient("left").ticks(7);
+	var yAxis = d3.svg.axis().scale(y)
+	    .orient("left").ticks(7);
 
-function make_x_axis() {        
-    return d3.svg.axis()
-        .scale(x)
-         .orient("bottom")
-         .ticks(5)
-}
+	function make_x_axis() {        
+	    return d3.svg.axis()
+	        .scale(x)
+	         .orient("bottom")
+	         .ticks(5)
+	}
 
-function make_y_axis() {        
-    return d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(5)
-}
+	function make_y_axis() {        
+	    return d3.svg.axis()
+	        .scale(y)
+	        .orient("left")
+	        .ticks(5)
+	}
 
 //replaace function with array
 d3.json(dataSet, function(error, data) {
@@ -291,25 +291,25 @@ d3.json(dataSet, function(error, data) {
           .style("opacity", 0.2)
           .attr("d", area);
 
-        svg.append("path")
+    svg.append("path")
             .attr("class", "line")
             .style("stroke", "yellow")
             .attr("d", line(points));
 
-        svg.append("path")
+    svg.append("path")
           .datum(points_avg)
           .attr("class", "area")
           .style("fill", "grey")
           .attr("d", area)
           .style("opacity", 0.2);
 
-        svg.append("path")
+    svg.append("path")
             .attr("class", "line")
             .style("stroke", "grey")
             .attr("d", line(points_avg));
 
 
-		svg.append("g")         
+	svg.append("g")         
         .attr("class", "grid")
         .style("stroke-opacity", 0.1)
         .attr("transform", "translate(0," + height + ")")
@@ -339,7 +339,6 @@ d3.json(dataSet, function(error, data) {
 
 
 });
-
 
 
 		}).fail(function(jqXHR, textStatus, errorThrown) {
