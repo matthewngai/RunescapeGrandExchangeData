@@ -43,6 +43,17 @@ app.get('/categories/:categoryID/:letter', function (req, res) {
 	});
 });
 
+app.get('/categories/:categoryID/:letter/:pageNumber', function (req, res) {
+	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category=' + req.params.categoryID + alpha + req.params.letter + page + req.params.pageNumber, function (error, response, body) {
+	  	if (!error && response.statusCode == 200) {
+			res.send(body);
+		} else {
+			console.log(response.statusCode);
+			console.log(error);
+		}
+	});
+});
+
 app.get('/item/:itemID', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=' + req.params.itemID, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
