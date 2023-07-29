@@ -75,22 +75,24 @@ var InfoTile = React.createClass({
 			return (
 				<div className="tileTable">
 					<table>
-					  <tr>
-					    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
-					    <td><span>{this.state.infoTile.name} {this.state.infoTile.members}</span></td>
-					  </tr>
-					  <tr>
-					    <td colSpan="2">Description: {this.state.infoTile.description}</td>
-					  </tr>
-					  <tr>
-					    <td colSpan="2">Type: {this.state.infoTile.type}</td>
-					  </tr>
-					  <tr>
-					    <td colSpan="2">Price: {this.state.infoTile.current.price}</td>
-					  </tr>
-					  <tr>
-					    <td colSpan="2">Trend: {this.state.infoTile.current.trend}</td>
-					  </tr>
+					  <tbody>
+						  <tr>
+						    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
+						    <td><span>{this.state.infoTile.name} {this.state.infoTile.members}</span></td>
+						  </tr>
+						  <tr>
+						    <td colSpan="2">Description: {this.state.infoTile.description}</td>
+						  </tr>
+						  <tr>
+						    <td colSpan="2">Type: {this.state.infoTile.type}</td>
+						  </tr>
+						  <tr>
+						    <td colSpan="2">Price: {this.state.infoTile.current.price} coins</td>
+						  </tr>
+						  <tr>
+						    <td colSpan="2">Trend: {this.state.infoTile.current.trend}</td>
+						  </tr>
+					  </tbody>
 					</table>
 				</div>
 			)

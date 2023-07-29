@@ -170,8 +170,13 @@ body {
 
 .tileTable {
   color: white;
+  padding: 25px;
 }
 
 table, th, td {
-    border: 1px solid white;
+  border: 1px solid white;
+}
+
+td {
+  padding: 10px !important;
 }
