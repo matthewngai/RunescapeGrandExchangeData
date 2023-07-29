@@ -28,11 +28,16 @@ body {
   padding: 5px 50px;
   background-color: #172f39;
   margin: 0;
-  width: 3200px;
+  width: 100%;
   margin-bottom: 20px;
   box-shadow: 0px 1px 10px #02090f;
 }
 
+@media screen and (max-width: 957px) {
+  .header {
+    height: 105px;
+  }
+}
 .header .header-banner h1 {
   color: #e1bb34;
   font-size: 36px;
