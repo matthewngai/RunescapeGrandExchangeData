@@ -198,6 +198,7 @@ var SearchModule = React.createClass({
 	onSubmit: function() {
 
 	},
+
 	onItemClick: function(id) {
 
 		$('#autocomplete').hide();	//hide search bar
@@ -213,8 +214,8 @@ var SearchModule = React.createClass({
 
 
   var margin = {top: 30, right: 20, bottom: 30, left: 50};
-  var width = 720 - margin.left - margin.right;
-  var height = 480 - margin.top - margin.bottom;
+  var width = 1280 - margin.left - margin.right;
+  var height = 720 - margin.top - margin.bottom;
 
 var svg = d3.select("body")
     .append("svg")
@@ -243,6 +244,20 @@ var xAxis = d3.svg.axis().scale(x)
 
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(7);
+
+function make_x_axis() {        
+    return d3.svg.axis()
+        .scale(x)
+         .orient("bottom")
+         .ticks(5)
+}
+
+function make_y_axis() {        
+    return d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(5)
+}
 
 //replaace function with array
 d3.json(dataSet, function(error, data) {
@@ -289,6 +304,22 @@ d3.json(dataSet, function(error, data) {
             .attr("class", "line")
             .style("stroke", "grey")
             .attr("d", line(points_avg));
+
+
+		svg.append("g")         
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + height + ")")
+        .call(make_x_axis()
+            .tickSize(-height, 0, 0)
+            .tickFormat("")
+        );
+
+    svg.append("g")         
+        .attr("class", "grid")
+        .call(make_y_axis()
+            .tickSize(-width, 0, 0)
+            .tickFormat("")
+        );
 
     svg.append("g")
         .attr("class", "x axis")
