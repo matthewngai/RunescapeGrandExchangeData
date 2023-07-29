@@ -236,7 +236,7 @@ var SearchModule = React.createClass({
 			var dataSet = data;
 
 
-  var margin = {top: 30, right: 120, bottom: 30, left: 150};
+  var margin = {top: 50, right: 150, bottom: 50, left: 150};
   var width = 1280 - margin.left - margin.right;
   var height = 720 - margin.top - margin.bottom;
 
@@ -408,17 +408,18 @@ d3.json(dataSet, function(error, data) {
 
 	svg.append("text")
 	    .attr("class", "x label")
-	    .attr("text-anchor", "end")
-	    .attr("x", width)
-	    .attr("y", height - 6)
+	    .attr("text-anchor", "middle")
+	    .attr("x", width/2)
+	    .attr("y", height+(margin.bottom))
 	    .text("Time");
 
 	svg.append("text")
 	    .attr("class", "y label")
-	    .attr("text-anchor", "end")
+	    .attr("text-anchor", "middle")
 	    .attr("y", 6)
 	    .attr("dy", ".75em")
-	    .attr("transform", "rotate(-90)")
+	    .attr("transform", "translate("+ (-margin.left/2) +","+(height/2)+")rotate(-90)")
+	    // .attr("transform", "rotate(-90)")
 	    .text("Coins");
 	});
 
