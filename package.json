@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matthewngai/web-scraper#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "react": "^0.12.0"
   }
 }
