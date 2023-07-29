@@ -411,6 +411,9 @@ d3.json(dataSet, function(error, data) {
 	    .attr("text-anchor", "middle")
 	    .attr("x", width/2)
 	    .attr("y", height+(margin.bottom))
+	    .style("stroke", "white")
+	    .style("fill", "white")
+		.style("font-size", "16px")
 	    .text("Time");
 
 	svg.append("text")
@@ -419,7 +422,9 @@ d3.json(dataSet, function(error, data) {
 	    .attr("y", 6)
 	    .attr("dy", ".75em")
 	    .attr("transform", "translate("+ (-margin.left/2) +","+(height/2)+")rotate(-90)")
-	    // .attr("transform", "rotate(-90)")
+	    .style("stroke", "white")
+	    .style("fill", "white")
+	    .style("font-size", "16px")
 	    .text("Coins");
 	});
 
