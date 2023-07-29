@@ -116,7 +116,7 @@ var DropdownList = React.createClass({
         var itemTitle;
         this.state.letterItemList.forEach(function(i) {
             itemTitle = i.name;
-            items.push(<MenuItem key={i.id} eventKey={i.name}>{itemTitle}</MenuItem>);
+            items.push(<MenuItem key={i.id} eventKey={i}>{itemTitle}</MenuItem>);
         });
         this.setState({ itemList: items});
     },
@@ -143,10 +143,39 @@ var DropdownList = React.createClass({
     },
 
     getItem: function(event) {
-        console.log(event);
         this.setState({
-            itemTitle : event,
+            itemTitle : event.name,
             selectedItem: event.id
+            }, function () {
+                //make api call here
+        });
+        this.getPriceAndGraph(event.id);
+    },
+
+    getPriceAndGraph: function(itemID) {
+        var priceURL = 'item/' + itemID;
+        $.ajax({
+            url: priceURL,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(url, status, err.toString());
+            }
+        });
+
+        $.ajax({
+            url: priceURL + '/graph',
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(url, status, err.toString());
+            }
         });
     },
 
