@@ -18,3 +18,7 @@ body {
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+
+.background-colour-page {
+	background-color: #0b1f2a;
+}
