@@ -72,20 +72,24 @@ var InfoTile = React.createClass({
 	},
 	render: function() {
 		if (this.state.infoTile !== null && this.state.infoTile !== undefined) {
+			console.log(this.state.infoTile);
 			return (
 				<div>
 					<div>
 						<img className="image" src={this.state.infoTile.icon_large} />
-						<span>{this.state.infoTile.name}</span>
+						<span>{this.state.infoTile.name} {this.state.infoTile.members}</span>
 					</div>
 					<div>
-						{this.state.infoTile.description}
+						Description: {this.state.infoTile.description}
 					</div>
 					<div>
-						{this.state.infoTile.type}
+						Type: {this.state.infoTile.type}
 					</div>
 					<div>
-					Trend: {this.state.infoTile.today.trend}
+						Price: {this.state.infoTile.current.price}
+					</div>
+					<div>
+						Trend: {this.state.infoTile.current.trend}
 					</div>
 				</div>
 			)
