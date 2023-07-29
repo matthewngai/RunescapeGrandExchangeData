@@ -41,6 +41,12 @@ var DateRange =  React.createClass({
 });
 
 var DropdownList = React.createClass({
+    getInitialState: function() {
+        return {
+            title: 'Category',
+            list: []
+        }
+    },
     getCategory: function(categoryID) {
         var url = 'categories/' + categoryID;
         $.ajax({
@@ -73,29 +79,36 @@ var DropdownList = React.createClass({
 
     createDropdownItems: function() {
         var items = [];
-        $.getJSON( "js/data/categories.json", function(data) {
-            console.log(data);
+        var catList = [];
+        $.getJSON("js/data/categories.json", function(data) {
+          $.each(data, function(key, val) {
+            items.push(<MenuItem key={parseInt(key)} eventKey={key}>{val}</MenuItem>);
+            catList[parseInt(key)] = val;
+          });
         });
-        // for (var i = 0; i < data.length; i++) {
-        //     items.push(<MenuItem eventKey=i>data[i].category</MenuItem>);
-        // }
+        this.setState({list: items});
         return items;
+    },
+
+    change: function(event) {
+        this.setState({title: this.state.list[event].props.children});
     },
 
     componentDidMount: function() {
         this.getCategory(1);
         this.getCategoryLetter(1, 'a');
+        this.createDropdownItems();
+
     },
 
     render: function() {
         return (
             <div>
                 <ButtonGroup id="bg-vertical-dropdown-1" vertical>
-                    <DropdownButton title="Category" id="bg-nested-dropdown dropdown-size-large">
-                        console.log(this.createDropdownItems());
-                        {this.createDropdownItems()}
+                    <DropdownButton title={this.state.title} id="bg-nested-dropdown dropdown-size-large" onSelect={this.change}>
+                    {this.state.list}
                     </DropdownButton>
-                    <DropdownButton title="Letter" id="bg-nested-dropdown dropdown-size-large">
+                    <DropdownButton title="Letter" id="bg-nested-dropdown dropdown-size-large" onSelect={this.getLetter}>
                     </DropdownButton>
                     <DropdownButton title="Item" id="bg-nested-dropdown dropdown-size-large">
                     </DropdownButton>
