@@ -22,37 +22,8 @@ var App = React.createClass({
 			<div>
 				<Header />
 				<DateRange />
-				<Graph />
 			</div>
 		)
-	}
-});
-
-var Graph = React.createClass({
-	componentDidMount: function() {
-
-	},
-	componentDidUpdate: function() {
-
-	},
-	drawChart: function(dataPoints) {
-
-
-	},
-	getDOMNode: function() {
-		return React.findDOMNode(this);
-	},
-	getGraphState: function() {
-		return {
-			data: this.props.data,
-			history: this.props.history
-		}
-	},
-	render: function() {
-		return (
-			<div>
-			</div>
-		);
 	}
 });
 
