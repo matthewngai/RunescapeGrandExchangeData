@@ -208,6 +208,7 @@ var SearchModule = React.createClass({
 			cache: false
 		}).done(function(data) {
 			console.log(data);
+			d3.select("svg").remove();
 			var dataSet = data;
 
 
@@ -268,21 +269,21 @@ d3.json(dataSet, function(error, data) {
     x.domain(d3.extent(keys));
     y.domain([0, d3.max(vals)]);
 
-        svg.append("path")
-          .datum(points)
-          .attr("class", "area")
-          .attr("d", area);
+        // svg.append("path")
+        //   .datum(points)
+        //   .attr("class", "area")
+        //   .attr("d", area);
 
         svg.append("path")
             .attr("class", "line")
             .style("stroke", "yellow")
             .attr("d", line(points));
 
-        svg.append("path")
-          .datum(points_avg)
-          .attr("class", "area")
-          .style("fill", "grey")
-          .attr("d", area);
+        // svg.append("path")
+        //   .datum(points_avg)
+        //   .attr("class", "area")
+        //   .style("fill", "grey")
+        //   .attr("d", area);
 
         svg.append("path")
             .attr("class", "line")
@@ -292,11 +293,14 @@ d3.json(dataSet, function(error, data) {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0, "+height+")")
+        .style("stroke", "white")
         .call(xAxis);
 
     svg.append("g")
         .attr("class", "y axis")
+        .style("stroke", "white")
         .call(yAxis);
+
 
 });
 
