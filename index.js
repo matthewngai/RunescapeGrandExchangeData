@@ -60,8 +60,3 @@
 //   d.close = +d.close;
 //   return d;
 // }
-const numCategory = 37;
-//category ID's
-for (var i = 0; i <= numCategory; i++) {
-	console.log('hi'); 
-}
