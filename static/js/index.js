@@ -71,6 +71,17 @@ var DropdownList = React.createClass({
         });
     },
 
+    createDropdownItems: function() {
+        var items = [];
+        $.getJSON( "js/data/categories.json", function(data) {
+            console.log(data);
+        });
+        // for (var i = 0; i < data.length; i++) {
+        //     items.push(<MenuItem eventKey=i>data[i].category</MenuItem>);
+        // }
+        return items;
+    },
+
     componentDidMount: function() {
         this.getCategory(1);
         this.getCategoryLetter(1, 'a');
@@ -81,6 +92,8 @@ var DropdownList = React.createClass({
             <div>
                 <ButtonGroup id="bg-vertical-dropdown-1" vertical>
                     <DropdownButton title="Category" id="bg-nested-dropdown dropdown-size-large">
+                        console.log(this.createDropdownItems());
+                        {this.createDropdownItems()}
                     </DropdownButton>
                     <DropdownButton title="Letter" id="bg-nested-dropdown dropdown-size-large">
                     </DropdownButton>
