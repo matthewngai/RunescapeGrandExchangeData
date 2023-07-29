@@ -138,15 +138,20 @@ var DateRange =  React.createClass({
 
 	render: function() {
 		return (
-			<div className="date-button">
-				<SplitButton bsStyle="warning" title={this.state.label} id={`split-button-basic-${1}`} onSelect={this.change}>
-				  <MenuItem eventKey="1">1 Month</MenuItem>
-				  <MenuItem eventKey="2">3 Months</MenuItem>
-				  <MenuItem eventKey="3">6 Months</MenuItem>
-				</SplitButton>
+			<div>
+				<div className="date-button">
+					<SplitButton bsStyle="warning" title={this.state.label} id={`split-button-basic-${1}`} onSelect={this.change}>
+					  <MenuItem eventKey="1">1 Month</MenuItem>
+					  <MenuItem eventKey="2">3 Months</MenuItem>
+					  <MenuItem eventKey="3">6 Months</MenuItem>
+					</SplitButton>
+					<span className="label-styling">
+						<span className="image-padding"><img className="image-padding" src="../img/yellow.png"/>Daily</span>
+						<span className="image-padding"><img className="image-padding" src="../img/gray.png"/>Trend</span>
+					</span>
+				</div>
 			</div>
 		)
-		// return null;
 	}
 });
 
