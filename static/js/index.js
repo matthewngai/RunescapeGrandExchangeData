@@ -283,8 +283,8 @@ var SearchModule = React.createClass({
 
 	},
 	displayGraph: function(data, currentDate) {
-			d3.selectAll("svg").remove();	//remove SVG
-			var dataSet = data;
+		d3.selectAll("svg").remove();	//remove SVG
+		var dataSet = data;
 
 		var margin = {top: 50, right: 150, bottom: 50, left: 150};
 		var width = 1280 - margin.left - margin.right;
@@ -298,184 +298,184 @@ var SearchModule = React.createClass({
 		        .attr("transform", 
 		              "translate(" + margin.left + "," + margin.top + ")");
 
-	// Set the ranges
-	var x = d3.time.scale().range([0, width]);
-	var y = d3.scale.linear().range([height, 0]);
+		// Set the ranges
+		var x = d3.time.scale().range([0, width]);
+		var y = d3.scale.linear().range([height, 0]);
 
-	var area = d3.svg.area()
-	    .x(function(d) { return x(d.x); })
-	    .y0(height)
-	    .y1(function(d) { return y(d.y); });
-	//plot lines
-	var line = d3.svg.line() 
-	    .x(function(d) { return x(d.x); })
-	    .y(function(d) { return y(d.y); });
+		var area = d3.svg.area()
+		    .x(function(d) { return x(d.x); })
+		    .y0(height)
+		    .y1(function(d) { return y(d.y); });
+		//plot lines
+		var line = d3.svg.line() 
+		    .x(function(d) { return x(d.x); })
+		    .y(function(d) { return y(d.y); });
 
-	//scale axis accordingly and set ticks
-	var xAxis = d3.svg.axis().scale(x)
-	    .orient("bottom").ticks(10);
+		//scale axis accordingly and set ticks
+		var xAxis = d3.svg.axis().scale(x)
+		    .orient("bottom").ticks(10);
 
-	var yAxis = d3.svg.axis().scale(y)
-	    .orient("left").ticks(7)
-	    	        .tickFormat(function (d) {
-			    var array = ['','k','M','G','T','P'];
-			    var i=0;
-			    while (d > 1000)
-			    {
-			        i++;
-			        d = d/1000;
-			    }
-			    d = d+array[i];
-			    return d;}
-    		);
+		var yAxis = d3.svg.axis().scale(y)
+		    .orient("left").ticks(7)
+		    	        .tickFormat(function (d) {
+				    var array = ['','k','M','G','T','P'];
+				    var i=0;
+				    while (d > 1000)
+				    {
+				        i++;
+				        d = d/1000;
+				    }
+				    d = d+array[i];
+				    return d;}
+	    		);
 
-	function make_x_axis() {        
-	    return d3.svg.axis()
-	        .scale(x)
-	         .orient("bottom")
-	         .ticks(5)
-	}
+		function make_x_axis() {        
+		    return d3.svg.axis()
+		        .scale(x)
+		         .orient("bottom")
+		         .ticks(5)
+		}
 
-	function make_y_axis() {        
-	    return d3.svg.axis()
-	        .scale(y)
-	        .orient("left")
-	        .ticks(5)
-	}
+		function make_y_axis() {        
+		    return d3.svg.axis()
+		        .scale(y)
+		        .orient("left")
+		        .ticks(5)
+		}
 
-//replaace function with array
-d3.json(dataSet, function(error, data) {
-  var day = dataSet.daily;
-  var avg = dataSet.average;
+		//replaace function with array
+		d3.json(dataSet, function(error, data) {
+			var day = dataSet.daily;
+			var avg = dataSet.average;
 
-  	var datesArray = [150, 90, 0];	//dates to start at
-    //daily
-    var keys = Object.keys(day);
-    var vals = Object.keys(day).map(function (key) { return day[key]; });
-    var points = [];
-    for (var i = datesArray[currentDate]; i < keys.length; i++) {
-      points.push({x: keys[i], y: vals[i]});
-    }
+		  	var datesArray = [150, 90, 0];	//dates to start at
+		    //daily
+		    var keys = Object.keys(day);
+		    var vals = Object.keys(day).map(function (key) { return day[key]; });
+		    var points = [];
+		    for (var i = datesArray[currentDate]; i < keys.length; i++) {
+		      points.push({x: keys[i], y: vals[i]});
+		    }
 
-    //monthly average
-    var points_avg = [];
-    var keys_avg = Object.keys(avg);
+		    //monthly average
+		    var points_avg = [];
+		    var keys_avg = Object.keys(avg);
 
-	var areaGradient = svg.append("defs")
-	.append("linearGradient")
-	.attr("id","areaGradient")
-	.attr("x1", "0%").attr("y1", "0%")
-	.attr("x2", "0%").attr("y2", "80%");
+			var areaGradient = svg.append("defs")
+			.append("linearGradient")
+			.attr("id","areaGradient")
+			.attr("x1", "0%").attr("y1", "0%")
+			.attr("x2", "0%").attr("y2", "80%");
 
-	areaGradient.append("stop")
-	.attr("offset", "0%")
-	.attr("stop-color", "#ffff66")
-	.attr("stop-opacity", 0.6);
-	areaGradient.append("stop")
-	.attr("offset", "80%")
-	.attr("stop-color", "white")
-	.attr("stop-opacity", 0);
+			areaGradient.append("stop")
+			.attr("offset", "0%")
+			.attr("stop-color", "#ffff66")
+			.attr("stop-opacity", 0.6);
+			areaGradient.append("stop")
+			.attr("offset", "80%")
+			.attr("stop-color", "white")
+			.attr("stop-opacity", 0);
 
-	var grayGradient = svg.append("defs")
-	.append("linearGradient")
-	.attr("id","grayGradient")
-	.attr("x1", "0%").attr("y1", "0%")
-	.attr("x2", "0%").attr("y2", "80%");
+			var grayGradient = svg.append("defs")
+			.append("linearGradient")
+			.attr("id","grayGradient")
+			.attr("x1", "0%").attr("y1", "0%")
+			.attr("x2", "0%").attr("y2", "80%");
 
-	grayGradient.append("stop")
-	.attr("offset", "0%")
-	.attr("stop-color", "#d9d9d9")
-	.attr("stop-opacity", 0.6);
-	grayGradient.append("stop")
-	.attr("offset", "80%")
-	.attr("stop-color", "white")
-	.attr("stop-opacity", 0);
-
-
-    var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
-    for (var i = datesArray[currentDate]; i < keys.length; i++) {
-      points_avg.push({x: keys_avg[i], y: vals_avg[i]});
-    }
-
-    x.domain(d3.extent(keys));
-    y.domain([0, d3.max(vals)]);
-
-        svg.append("path")
-          .datum(points)
-          .attr("class", "area")
-          .style("fill", "url(#areaGradient)")
-          .style("opacity", 0.2)
-          .attr("d", area);
-
-    svg.append("path")
-            .attr("class", "line")
-            .style("stroke", "yellow")
-            .attr("d", line(points));
-
-    svg.append("path")
-          .datum(points_avg)
-          .attr("class", "area")
-          .style("fill", "url(#grayGradient)")
-          .attr("d", area)
-          .style("opacity", 0.2);
-
-    svg.append("path")
-            .attr("class", "line")
-            .style("stroke", "grey")
-            .attr("d", line(points_avg));
+			grayGradient.append("stop")
+			.attr("offset", "0%")
+			.attr("stop-color", "#d9d9d9")
+			.attr("stop-opacity", 0.6);
+			grayGradient.append("stop")
+			.attr("offset", "80%")
+			.attr("stop-color", "white")
+			.attr("stop-opacity", 0);
 
 
-	svg.append("g")         
-        .attr("class", "grid")
-        .style("stroke-opacity", 0.1)
-        .attr("transform", "translate(0," + height + ")")
-        .call(make_x_axis()
-            .tickSize(-height, 0, 0)
-            .tickFormat("")
-        );
+		    var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
+		    for (var i = datesArray[currentDate]; i < keys.length; i++) {
+		      points_avg.push({x: keys_avg[i], y: vals_avg[i]});
+		    }
 
-    svg.append("g")         
-        .attr("class", "grid")
-        .style("stroke-opacity", 0.1)
-        .call(make_y_axis()
-            .tickSize(-width, 0, 0)
-            .tickFormat("")
-        );
+		    x.domain(d3.extent(keys));
+		    y.domain([0, d3.max(vals)]);
 
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0, "+height+")")
-        .style("fill", "white")
-        .style("class", "textLabels")
-        .call(xAxis);
+		        svg.append("path")
+		          .datum(points)
+		          .attr("class", "area")
+		          .style("fill", "url(#areaGradient)")
+		          .style("opacity", 0.2)
+		          .attr("d", area);
 
-    svg.append("g")
-        .attr("class", "y axis")
-        .style("fill", "white")
-        .style("class", "textLabels")
-        .call(yAxis);
+		    svg.append("path")
+		            .attr("class", "line")
+		            .style("stroke", "yellow")
+		            .attr("d", line(points));
 
-	svg.append("text")
-	    .attr("class", "x label")
-	    .attr("text-anchor", "middle")
-	    .attr("x", width/2)
-	    .attr("y", height+(margin.bottom - 7))
-	    .style("fill", "white")
-		.style("font-size", "16px")
-		.style("font-weight", "lighter")
-	    .text("Time");
+		    svg.append("path")
+		          .datum(points_avg)
+		          .attr("class", "area")
+		          .style("fill", "url(#grayGradient)")
+		          .attr("d", area)
+		          .style("opacity", 0.2);
 
-	svg.append("text")
-	    .attr("class", "y label")
-	    .attr("text-anchor", "middle")
-	    .attr("y", 6)
-	    .attr("dy", ".75em")
-	    .attr("transform", "translate("+ (-margin.left/2) +","+(height/2)+")rotate(-90)")
-	    .style("fill", "white")
-	    .style("font-size", "16px")
-	    .style("font-weight", "lighter")
-	    .text("Price (Coins)");
-	});
+		    svg.append("path")
+		            .attr("class", "line")
+		            .style("stroke", "grey")
+		            .attr("d", line(points_avg));
+
+
+			svg.append("g")         
+		        .attr("class", "grid")
+		        .style("stroke-opacity", 0.1)
+		        .attr("transform", "translate(0," + height + ")")
+		        .call(make_x_axis()
+		            .tickSize(-height, 0, 0)
+		            .tickFormat("")
+		        );
+
+		    svg.append("g")         
+		        .attr("class", "grid")
+		        .style("stroke-opacity", 0.1)
+		        .call(make_y_axis()
+		            .tickSize(-width, 0, 0)
+		            .tickFormat("")
+		        );
+
+		    svg.append("g")
+		        .attr("class", "x axis")
+		        .attr("transform", "translate(0, "+height+")")
+		        .style("fill", "white")
+		        .style("class", "textLabels")
+		        .call(xAxis);
+
+		    svg.append("g")
+		        .attr("class", "y axis")
+		        .style("fill", "white")
+		        .style("class", "textLabels")
+		        .call(yAxis);
+
+			svg.append("text")
+			    .attr("class", "x label")
+			    .attr("text-anchor", "middle")
+			    .attr("x", width/2)
+			    .attr("y", height+(margin.bottom - 7))
+			    .style("fill", "white")
+				.style("font-size", "16px")
+				.style("font-weight", "lighter")
+			    .text("Time");
+
+			svg.append("text")
+			    .attr("class", "y label")
+			    .attr("text-anchor", "middle")
+			    .attr("y", 6)
+			    .attr("dy", ".75em")
+			    .attr("transform", "translate("+ (-margin.left/2) +","+(height/2)+")rotate(-90)")
+			    .style("fill", "white")
+			    .style("font-size", "16px")
+			    .style("font-weight", "lighter")
+			    .text("Price (Coins)");
+		});
 
 	},
 	onItemClick: function(item) {
