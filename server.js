@@ -1,10 +1,14 @@
 var express = require('express');
 var request = require('request');
+var path = require('path');
+var router = express.Router();
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'static')));
 
-app.get('/', function (req, res) {
-  res.send('Testing 123');
+router.get('/', function (req, res) {
+  // res.send('Testing 123');
+  res.sendFile('index.html', {root: './static'});
 });
 
 app.listen(3000, function () {
@@ -17,7 +21,6 @@ var category = 'category=';
 var items = 'items.json?';
 var category = 'category.json?';
 var service_url = 'http://services.runescape.com/m=itemdb_rs/api/catalogue/';
-
 
 app.get('/categories/:categoryID', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/category.json?category=' + req.params.categoryID, function (error, response, body) {
