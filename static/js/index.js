@@ -284,21 +284,24 @@ d3.json(dataSet, function(error, data) {
     x.domain(d3.extent(keys));
     y.domain([0, d3.max(vals)]);
 
-        // svg.append("path")
-        //   .datum(points)
-        //   .attr("class", "area")
-        //   .attr("d", area);
+        svg.append("path")
+          .datum(points)
+          .attr("class", "area")
+          .style("fill", "yellow")
+          .style("opacity", 0.2)
+          .attr("d", area);
 
         svg.append("path")
             .attr("class", "line")
             .style("stroke", "yellow")
             .attr("d", line(points));
 
-        // svg.append("path")
-        //   .datum(points_avg)
-        //   .attr("class", "area")
-        //   .style("fill", "grey")
-        //   .attr("d", area);
+        svg.append("path")
+          .datum(points_avg)
+          .attr("class", "area")
+          .style("fill", "grey")
+          .attr("d", area)
+          .style("opacity", 0.2);
 
         svg.append("path")
             .attr("class", "line")
@@ -308,6 +311,7 @@ d3.json(dataSet, function(error, data) {
 
 		svg.append("g")         
         .attr("class", "grid")
+        .style("stroke-opacity", 0.1)
         .attr("transform", "translate(0," + height + ")")
         .call(make_x_axis()
             .tickSize(-height, 0, 0)
@@ -316,6 +320,7 @@ d3.json(dataSet, function(error, data) {
 
     svg.append("g")         
         .attr("class", "grid")
+        .style("stroke-opacity", 0.1)
         .call(make_y_axis()
             .tickSize(-width, 0, 0)
             .tickFormat("")
