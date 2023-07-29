@@ -272,7 +272,13 @@ var SearchModule = React.createClass({
 	onSubmit: function() {
 
 	},
-
+	removeDates: function(obj, datesToTruncate) {
+		var propertyArray = Object.values(obj);         
+		for(var i = 0; i < datesToTruncate; i++) {
+		  delete obj[Object.keys(obj)[i]];
+		}
+		return obj;                                                          
+	},
 	onItemClick: function(item) {
 		var that = this;
 		this.props.onTileChange(item); //pass item
@@ -285,14 +291,18 @@ var SearchModule = React.createClass({
 			cache: false
 		}).done(function(data) {
 			console.log(data);
-			d3.select("svg").remove();
+			d3.select("svg").remove();	//remove SVG
 			var dataSet = data;
 
 			if (that.state.dateFormat === 0) {
-
+				//remove first 150 keys
+				dataSet.daily = that.removeDates(dataSet.daily, 150);
+				dataSet.average = that.removeDates(dataSet.average, 150);
 			}
 			else if (that.state.dateFormat === 1) {
-
+				//remove first 90 keys
+				dataSet.daily = that.removeDates(dataSet.daily, 90);
+				dataSet.average = that.removeDates(dataSet.average, 90);
 			}
 
 		var margin = {top: 50, right: 150, bottom: 50, left: 150};
