@@ -23,5 +23,8 @@
     "react-bootstrap": "^0.30.0",
     "request": "^2.74.0",
     "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.8.0"
   }
 }
