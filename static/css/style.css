@@ -70,6 +70,7 @@ body {
 .scrollable-dropdown-menu {
   max-height: 350px;
   overflow-y: auto;
+  margin-right: 7px;
 }
 
 .tt-input, /* UPDATE: newer versions use tt-input instead of tt-query */
@@ -177,6 +178,7 @@ th, td {
 
 td {
   padding: 10px !important;
+  border: 1px solid white;
 }
 
 table {
