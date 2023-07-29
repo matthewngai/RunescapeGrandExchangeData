@@ -44,6 +44,11 @@ body {
     src: url(../font/cinzel/cinzelBold.ttf);
 }
 
+.textLabels {
+  font-family: cinzelBold;
+  font-size: 14px;
+}
+
 .top-margin {
     margin-top: 7px;
     position: fixed;
