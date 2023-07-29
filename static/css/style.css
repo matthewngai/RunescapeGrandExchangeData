@@ -36,6 +36,7 @@ body {
 @media screen and (max-width: 957px) {
   .header {
     height: 105px;
+    width: 1920px;
   }
 }
 .header .header-banner h1 {
