@@ -171,7 +171,7 @@ var DropdownList = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data) {
-                console.log(data);
+                console.log(data); //graph
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(url, status, err.toString());
