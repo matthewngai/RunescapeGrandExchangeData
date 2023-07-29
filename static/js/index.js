@@ -436,6 +436,7 @@ var SearchModule = React.createClass({
 		    // Add the scatterplot
 		    var timeFormat = d3.time.format("%d %b %y");
 		    var commaFormat = d3.format(',');
+
 		    svg.selectAll("dot")	
 		        .data(points)			
 		    .enter().append("circle")
@@ -447,7 +448,28 @@ var SearchModule = React.createClass({
 		            div.transition()
 		                .duration(200)
 		                .style("opacity", .9);		
-		            div.html(timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
+		            div.html("Daily" + "<br/>" + timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
+		                .style("left", (d3.event.pageX) + "px")
+		                .style("top", (d3.event.pageY - 28) + "px");
+		            })
+		        .on("mouseout", function(d) {
+		            div.transition()
+		                .duration(500)
+		                .style("opacity", 0);
+		        });
+
+		    svg.selectAll("dot")	
+		        .data(points_avg)			
+		    .enter().append("circle")
+		        .attr("r", 3)
+		        .style("fill", "grey")
+		        .attr("cx", function(d) { return x(d.x); })
+		        .attr("cy", function(d) { return y(d.y); })
+		        .on("mouseover", function(d) {
+		            div.transition()
+		                .duration(200)
+		                .style("opacity", .9);		
+		            div.html("Average" + "<br/>" + timeFormat(new Date(parseInt(d.x))) + "<br/>" + commaFormat(d.y))	
 		                .style("left", (d3.event.pageX) + "px")
 		                .style("top", (d3.event.pageY - 28) + "px");
 		            })
