@@ -78,7 +78,9 @@ var InfoTile = React.createClass({
 					  <tbody>
 						  <tr>
 						    <td><img className="image" src={this.state.infoTile.icon_large} /></td>
-						    <td><span>{this.state.infoTile.name} {this.state.infoTile.members}</span></td>
+						    <td><span>{this.state.infoTile.name}</span>
+						     {this.state.infoTile.members=='true' ? <img src="../img/members.png" /> : false}
+						    </td>
 						  </tr>
 						  <tr>
 						    <td colSpan="2">Description: {this.state.infoTile.description}</td>
