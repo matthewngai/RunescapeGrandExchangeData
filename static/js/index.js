@@ -171,16 +171,10 @@ var SearchModule = React.createClass({
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {
 		if (this.state.dataResults !== nextState.dataResults) {
-			var _data = nextState.dataResults;
-			var _date = this.state.dateFormat;
-			console.log("data changed");
-			this.displayGraph(_data, _date);
+			this.displayGraph(nextState.dataResults, this.state.dateFormat);
 		}
 		else if (this.state.dateFormat !== nextState.dateFormat) {
-			// Get the size of an object
-			var _data = this.state.dataResults;
-			var _date = nextState.dateFormat;
-			this.displayGraph(_data, _date);
+			this.displayGraph(this.state.dataResults, nextState.dateFormat);
 		}
 		return true;
 	},
