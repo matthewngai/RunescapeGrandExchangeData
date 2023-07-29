@@ -51,7 +51,9 @@ var DropdownList = React.createClass({
             letterList: [],
             letterItemList: [],
             itemList: [],
-            selectedCategory: 0
+            selectedCategory: 0,
+            selectedLetter: null,
+            selectedItem: null
         }
     },
     getCategory: function(categoryID) {
@@ -114,23 +116,38 @@ var DropdownList = React.createClass({
         var itemTitle;
         this.state.letterItemList.forEach(function(i) {
             itemTitle = i.name;
-            items.push(<MenuItem key={i.name} eventKey={i.name}>{itemTitle}</MenuItem>);
+            items.push(<MenuItem key={i.id} eventKey={i.name}>{itemTitle}</MenuItem>);
         });
         this.setState({ itemList: items});
     },
 
     change: function(event) {
-        this.setState({title: this.state.list[event].props.children, selectedCategory: event});
+        this.setState({
+            title: this.state.list[event].props.children,
+            selectedCategory: event,
+            selectedLetter: null,
+            selectedItem: null,
+            letterTitle : 'Letter'
+        });
         this.getCategory(event);
     },
 
     getLetter: function(event) {    
-        this.setState({ letterTitle : event.toUpperCase()});
+        this.setState({ 
+            letterTitle : event.toUpperCase(),
+            selectedLetter: event,
+            selectedItem: null,
+            itemTitle : 'Item'
+        });
         this.getCategoryLetter(this.state.selectedCategory, event);
     },
 
     getItem: function(event) {
-        this.setState({ itemTitle : event});
+        console.log(event);
+        this.setState({
+            itemTitle : event,
+            selectedItem: event.id
+        });
     },
 
     componentDidMount: function() {
