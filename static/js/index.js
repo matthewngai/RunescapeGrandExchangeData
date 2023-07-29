@@ -30,7 +30,7 @@ var App = React.createClass({
 			<div>
 				<Header tileToPage={this.delegateTile}/>
 				<DateRange />
-				<InfoTile />
+				<InfoTile infoTile={this.state.selectedInfoTile}/>
 			</div>
 		)
 	}
@@ -62,10 +62,22 @@ var Header = React.createClass({
 var InfoTile = React.createClass({
 	getInitialState: function() {
 		return {
-			infoTile: null
+			infoTile: this.props.infoTile
+		}
+	},
+	componentWillReceiveProps: function(nextProps) {
+		if (this.props.infoTile !== nextProps.infoTile) {
+			this.setState({ infoTile: nextProps.infoTile });
 		}
 	},
 	render: function() {
+		if (this.state.infoTile !== null && this.state.infoTile !== undefined) {
+			return (
+				<div>
+				<img className="image" src={this.state.infoTile.icon_large} />
+				</div>
+			)
+		}
 		return null;
 	}
 });
