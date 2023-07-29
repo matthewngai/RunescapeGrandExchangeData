@@ -189,3 +189,16 @@ table {
 .date-button {
   margin-left: 25px; 
 }
+
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 100px;          
+    height: 36px;         
+    padding: 5px;       
+    font: 12px sans-serif;    
+    background: white; 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;     
+}
