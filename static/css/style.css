@@ -52,6 +52,7 @@ body {
 
 .top-margin {
     margin-top: 7px;
+    margin-right: 10px !important;
     position: fixed;
 }
 .styled-input-group .input-group-addon{
@@ -70,7 +71,6 @@ body {
 .scrollable-dropdown-menu {
   max-height: 350px;
   overflow-y: auto;
-  margin-right: 7px;
 }
 
 .tt-input, /* UPDATE: newer versions use tt-input instead of tt-query */
