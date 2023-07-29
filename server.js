@@ -7,7 +7,6 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'static')));
 
 router.get('/', function (req, res) {
-  // res.send('Testing 123');
   res.sendFile('index.html', {root: './static'});
 });
 
@@ -26,6 +25,9 @@ app.get('/categories/:categoryID', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/category.json?category=' + req.params.categoryID, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
+		} else {
+			console.log(response.statusCode);
+			console.log(error);
 		}
 	});
 });
@@ -34,6 +36,9 @@ app.get('/categories/:categoryID/:letter', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category=' + req.params.categoryID + alpha + req.params.letter, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
+		} else {
+			console.log(response.statusCode);
+			console.log(error);
 		}
 	});
 });
@@ -42,7 +47,20 @@ app.get('/item/:itemID', function (req, res) {
 	request('http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=' + req.params.itemID, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 			res.send(body);
+		} else {
+			console.log(response.statusCode);
+			console.log(error);
 		}
 	});
 });
 
+app.get('/item/:itemID/graph', function (req, res) {
+	request('http://services.runescape.com/m=itemdb_rs/api/graph/' + req.params.itemID + '.json', function (error, response, body) {
+	  	if (!error && response.statusCode == 200) {
+			res.send(body);
+		} else {
+			console.log(response.statusCode);
+			console.log(error);
+		}
+	});
+});
