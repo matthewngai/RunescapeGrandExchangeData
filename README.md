@@ -4,6 +4,6 @@
 ```
 npm install
 npm start server.js
-go to http://localhost:3000/
+go to http://localhost:3001/
 ```
 
