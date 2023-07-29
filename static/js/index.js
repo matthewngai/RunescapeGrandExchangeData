@@ -13,8 +13,37 @@ var App = React.createClass({
 			<div>
 				<Header />
 				<DateRange />
+				<Graph />
 			</div>
 		)
+	}
+});
+
+var Graph = React.createClass({
+	componentDidMount: function() {
+
+	},
+	componentDidUpdate: function() {
+
+	},
+	drawChart: function(dataPoints) {
+
+
+	},
+	getDOMNode: function() {
+		return React.findDOMNode(this);
+	},
+	getGraphState: function() {
+		return {
+			data: this.props.data,
+			history: this.props.history
+		}
+	},
+	render: function() {
+		return (
+			<div>
+			</div>
+		);
 	}
 });
 
@@ -33,6 +62,7 @@ var Header = React.createClass({
 					</div>
 				</div>
 			</div>
+
 		);
 	}
 });
@@ -76,6 +106,7 @@ var SearchModule = React.createClass({
 			displayResults : null
 		}
 	},
+
 	componentDidMount: function() {
 		var that = this;
 		$('#autocomplete').on('scroll', function() {
@@ -168,7 +199,112 @@ var SearchModule = React.createClass({
 
 	},
 	onItemClick: function(id) {
-		$('#autocomplete').hide();
+
+		$('#autocomplete').hide();	//hide search bar
+		var searchQuery = "/item/" + id + "/" + "graph";
+		this.xhr = $.ajax({
+			dataType: 'json',
+			url: searchQuery,
+			cache: false
+		}).done(function(data) {
+			console.log(data);
+			var dataSet = data;
+
+
+  var margin = {top: 30, right: 20, bottom: 30, left: 50};
+  var width = 720 - margin.left - margin.right;
+  var height = 480 - margin.top - margin.bottom;
+
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+// Set the ranges
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+var area = d3.svg.area()
+    .x(function(d) { return x(d.x); })
+    .y0(height)
+    .y1(function(d) { return y(d.y); });
+//plot lines
+var line = d3.svg.line() 
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+//scale axis accordingly and set ticks
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(10);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(7);
+
+//replaace function with array
+d3.json(dataSet, function(error, data) {
+	console.log(error);
+	console.log(dataSet);
+  var day = dataSet.daily;
+  var avg = dataSet.average;
+    //daily
+    var keys = Object.keys(day);
+    var vals = Object.keys(day).map(function (key) { return day[key]; });
+    var points = [];
+    for (var i = 0; i < keys.length; i++) {
+      points.push({x: keys[i], y: vals[i]});
+    }
+
+    //monthly average
+    var points_avg = [];
+    var keys_avg = Object.keys(avg);
+    var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
+    for (var i = 0; i < keys.length; i++) {
+      points_avg.push({x: keys_avg[i], y: vals_avg[i]});
+    } 
+
+    x.domain(d3.extent(keys));
+    y.domain([0, d3.max(vals)]);
+
+        svg.append("path")
+          .datum(points)
+          .attr("class", "area")
+          .attr("d", area);
+
+        svg.append("path")
+            .attr("class", "line")
+            .style("stroke", "yellow")
+            .attr("d", line(points));
+
+        svg.append("path")
+          .datum(points_avg)
+          .attr("class", "area")
+          .style("fill", "grey")
+          .attr("d", area);
+
+        svg.append("path")
+            .attr("class", "line")
+            .style("stroke", "grey")
+            .attr("d", line(points_avg));
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0, "+height+")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+});
+
+
+
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log(textStatus + errorThrown);
+		});
 	},
 	onMouseOver: function(id) {
 
@@ -206,3 +342,4 @@ ReactDOM.render(
 	<App />,
 	document.getElementById('app')
 );
+
