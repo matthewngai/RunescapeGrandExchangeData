@@ -347,12 +347,13 @@ var SearchModule = React.createClass({
 		d3.json(dataSet, function(error, data) {
 			var day = dataSet.daily;
 			var avg = dataSet.average;
-
 		  	var datesArray = [150, 90, 0];	//dates to start at
+
 		    //daily
+		    var points = [];
 		    var keys = Object.keys(day);
 		    var vals = Object.keys(day).map(function (key) { return day[key]; });
-		    var points = [];
+
 		    for (var i = datesArray[currentDate]; i < keys.length; i++) {
 		      points.push({x: keys[i], y: vals[i]});
 		    }
@@ -360,8 +361,8 @@ var SearchModule = React.createClass({
 		    //monthly average
 		    var points_avg = [];
 		    var keys_avg = Object.keys(avg);
-
 		    var vals_avg = Object.keys(avg).map(function (key) { return avg[key]; });
+
 		    for (var i = datesArray[currentDate]; i < keys.length; i++) {
 		      points_avg.push({x: keys_avg[i], y: vals_avg[i]});
 		    }
@@ -422,7 +423,7 @@ var SearchModule = React.createClass({
 			.attr("offset", "80%")
 			.attr("stop-color", "white")
 			.attr("stop-opacity", 0);
-			
+
 			svg.append("g")         
 		        .attr("class", "grid")
 		        .style("stroke-opacity", 0.1)
